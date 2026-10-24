@@ -1,0 +1,26 @@
+# Environment & Local Databases
+*.sqlite
+*.sqlite3
+*.db
+campusfix_local.sqlite
+
+# Session and Temporary files
+*.log
+*.tmp
+*.txt
+!README.md
+
+# Uploaded complaint images (keep directory)
+uploads/*
+!uploads/.gitkeep
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor folders
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
