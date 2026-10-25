@@ -26,7 +26,12 @@ define('APP_TAGLINE',  'Smart Campus Facility Monitoring & Issue Resolution');
 define('APP_VERSION',  '1.0.0');
 
 // Base URL — adjust if project lives in a subdirectory
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+
+$protocol = (
+    (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+    || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https')
+) ? 'https' : 'http';
+
 $host     = $_SERVER['HTTP_HOST'] ?? 'localhost';
 // Auto-detect base path from this file's location
 $scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
