@@ -129,11 +129,25 @@ function getDB(?PDO $override = null): PDO {
     if ($pdo === null) {
         // 1. Primary Engine: MySQL / MariaDB via PDO (XAMPP Stack)
         try {
-            $dsn = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=' . DB_CHARSET;
+            
+$dsn = 'mysql:host=' . DB_HOST
+    . ';port=' . DB_PORT
+    . ';dbname=' . DB_NAME
+    . ';charset=' . DB_CHARSET;
+
+$caPath = __DIR__ . '/../ca.pem';
+
+if (!is_readable($caPath)) {
+    throw new RuntimeException('Aiven CA certificate not found: ' . $caPath);
+}
+
             $pdo = new PDO($dsn, DB_USER, DB_PASS, [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES   => false,
+                PDO::ATTR_EMULATE_PREPARES   => false, 
+                PDO::MYSQL_ATTR_SSL_CA => $caPath,
+                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => true,
+
             ]);
             return $pdo;
         } catch (PDOException $e) {
