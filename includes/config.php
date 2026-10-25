@@ -13,10 +13,11 @@ if (basename($_SERVER['PHP_SELF']) === basename(__FILE__)) {
 }
 
 // ── Database ─────────────────────────────────────────────
-define('DB_HOST',   getenv('CF_DB_HOST')   ?: 'localhost');
-define('DB_NAME',   getenv('CF_DB_NAME')   ?: 'campusfix');
-define('DB_USER',   getenv('CF_DB_USER')   ?: 'root');
-define('DB_PASS',   getenv('CF_DB_PASS')   ?: '');
+define('DB_HOST',   getenv('CF_DB_HOST') ?: 'localhost');
+define('DB_PORT',   (int)(getenv('CF_DB_PORT') ?: 3306));
+define('DB_NAME',   getenv('CF_DB_NAME') ?: 'campusfix');
+define('DB_USER',   getenv('CF_DB_USER') ?: 'root');
+define('DB_PASS',   getenv('CF_DB_PASS') ?: '');
 define('DB_CHARSET', 'utf8mb4');
 
 // ── Application ──────────────────────────────────────────
